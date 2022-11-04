@@ -94,6 +94,10 @@ func parseDfOutput(out string) ([]interface{}, error) {
 		info["kb_size"] = strings.SplitN(kbsizeAndMore, " ", 2)[0]
 
 		// mounted_on is left-aligned under "Mounted on" and continues to EOL
+		//剔除var/lib开头的文件系统
+		if strings.HasPrefix(line[mountedOnOffset:], "/var/lib/") {
+			continue
+		}
 		info["mounted_on"] = strings.Trim(line[mountedOnOffset:], " ")
 
 		fileSystemInfo = append(fileSystemInfo, info)

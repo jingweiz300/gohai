@@ -28,5 +28,11 @@ func GetArchInfo() (archInfo map[string]string, err error) {
 	}
 	archInfo["kernel_version"] = strings.Trim(string(out), "\n")
 
+	out, err = exec.Command("cat", "/etc/redhat-release").Output()
+	if err != nil {
+		return nil, err
+	}
+	archInfo["release_version"] = strings.Trim(string(out), "\n")
+
 	return
 }
