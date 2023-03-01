@@ -95,6 +95,9 @@ func parseDfOutput(out string) ([]interface{}, error) {
 
 		// mounted_on is left-aligned under "Mounted on" and continues to EOL
 		//剔除var/lib开头的文件系统
+		if mountedOnOffset > len(line) {
+			continue
+		}
 		if strings.HasPrefix(line[mountedOnOffset:], "/var/lib/") {
 			continue
 		}

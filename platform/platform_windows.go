@@ -176,6 +176,7 @@ func GetArchInfo() (systemInfo map[string]string, err error) {
 	}
 
 	systemInfo["os"], err = fetchOsDescription()
+	systemInfo["release_version"], err = fetchOsDescription()
 
 	maj, min, bld, err := fetchWindowsVersion()
 	verstring := fmt.Sprintf("%d.%d.%d", maj, min, bld)
