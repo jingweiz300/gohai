@@ -6,6 +6,7 @@ package platform
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"regexp"
 	"strings"
@@ -30,10 +31,10 @@ func GetArchInfo() (archInfo map[string]string, err error) {
 	archInfo["kernel_version"] = strings.Trim(string(out), "\n")
 
 	osReleasePath := "/etc"
-	if os.Getenv("KUBERNETES_SERVICE_PORT") != ""  {
+	if os.Getenv("KUBERNETES_SERVICE_PORT") != "" {
 		osReleasePath = "/host/etc"
 	}
-	if 
+
 	archInfo["release_version"] = getOsFromOsReleaseFile(osReleasePath)
 
 	return
